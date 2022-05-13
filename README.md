@@ -14,6 +14,13 @@ Ejecutar el docker-compose:
 docker-compose up
 `
 
+Ver que tenemos los contenedores arrancados:
+
+
+`
+docker ps
+`
+
 Apagar el docker-compose:
 
 
