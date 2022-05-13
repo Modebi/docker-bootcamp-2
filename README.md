@@ -13,3 +13,12 @@ Ejecutar el docker-compose:
 `
 docker-compose up
 `
+
+Apagar el docker-compose:
+
+
+`
+docker-compose down
+`
+
+
