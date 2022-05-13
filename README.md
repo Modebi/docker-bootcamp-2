@@ -7,6 +7,8 @@ Hacer build de cada una de las imágenes:
 docker build . -t adminserver-0.0.1
 `
 
+En nuestro docker-compose.yml tenemos configurado el bindeo de puertos y hacemos referencia a las imágenes que ya hemos construido.
+
 Ejecutar el docker-compose:
 
 
