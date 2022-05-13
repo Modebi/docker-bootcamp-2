@@ -20,28 +20,28 @@ services:
         depends_on:
             - price-database
         command: ''
-        image: localhost:5000/bootcamp/eurekaservice:0.0.1-SNAPSHOT
+        image: eurekaserver-0.0.1
         ports:
             - 8761:9090
         logging:
             driver: 'json-file'
-   # product-service:
-   #     depends_on:
-   #         - eureka-service
-   #     command: ''
-   #     image: localhost:5000/bootcamp/productservice:0.0.1-SNAPSHOT
-   #     environment:
-   #         - EUREKA_SERVER=http://eureka-service:9090/eureka/
-   #     ports:
-   #         - 8081:9090
-   #     logging:
-   #         driver: 'json-file'
+    product-service:
+        depends_on:
+            - eureka-service
+        command: ''
+        image: productservice-0.0.1
+        environment:
+            - EUREKA_SERVER=http://eureka-service:9090/eureka/
+        ports:
+            - 8081:9090
+        logging:
+            driver: 'json-file'
     price-service:
         depends_on:
             - price-database
             - eureka-service
         command: ''
-        image: localhost:5000/bootcamp/priceservice:0.0.1-SNAPSHOT
+        image: priceservice-0.0.1
         environment:
             - SPRING_DATASOURCE_URL=jdbc:mysql://price-database:3306/prices?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
             - SPRING_DATASOURCE_USERNAME=sa
@@ -51,24 +51,24 @@ services:
             - 8082:9090
         logging:
             driver: 'json-file'
-   # zuul-service:
-   #     depends_on:
-   #         - price-service
-   #         - product-service
-   #     command: ''
-   #     image: localhost:5000/bootcamp/zuulservice:0.0.1-SNAPSHOT
-   #     environment:
-   #         - EUREKA_SERVER=http://eureka-service:9090/eureka/
-   #     ports:
-   #         - 9090:9090
-   #     logging:
-   #         driver: 'json-file'
-   # admin-service:
-   #     depends_on:
-   #         - price-service
-    #        - product-service
-    #    command: ''
-    #    image: localhost:5000/bootcamp/adminservice:0.0.1-SNAPSHOT
-     #   ports:
-     #       - 9091:9090
+    zuul-service:
+        depends_on:
+            - price-service
+            - product-service
+        command: ''
+        image: zuulservice-0.0.1
+        environment:
+            - EUREKA_SERVER=http://eureka-service:9090/eureka/
+        ports:
+            - 9090:9090
+        logging:
+            driver: 'json-file'
+    admin-service:
+        depends_on:
+            - price-service
+            - product-service
+        command: ''
+        image: adminserver-0.0.1
+        ports:
+            - 9091:9090
 
